@@ -1,0 +1,29 @@
+.qr-scanner {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    overflow: hidden;
+}
+
+.qr-scanner--fullscreen {
+    position: fixed;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.qr-scanner__cursor {
+    display: block;
+    position: absolute;
+    box-sizing: content-box;
+    border: 3px solid;
+    border-image: radial-gradient(transparent 85%, white 0) 1;
+}
+
+.qr-scanner--fullscreen .qr-scanner__cursor {
+    max-width: calc(100% - 6px);
+    max-height: calc(100% - 6px);
+}

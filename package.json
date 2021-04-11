@@ -1,0 +1,54 @@
+{
+  "name": "qrx-scanner",
+  "version": "1.0.0",
+  "description": "QR code scanning component for React based on jsQR and react-webcam.",
+  "main": "dist/qrx-scanner.js",
+  "types": "dist/types/index.d.ts",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/thylacinus-official/qrx-scanner.git"
+  },
+  "keywords": [
+    "qr-code",
+    "react"
+  ],
+  "scripts": {
+    "build": "cross-env NODE_ENV=production webpack",
+    "demo": "cross-env NODE_ENV=development webpack serve --config webpack.demo.config.js",
+    "demo:dev": "cross-env NODE_ENV=development webpack --config webpack.demo.config.js",
+    "dev": "cross-env NODE_ENV=development webpack",
+    "lint": "eslint {demo,src}/**/*.{js,ts,jsx,tsx} & tsc --noEmit",
+    "prepublish": "npm run dev && npm run demo:dev",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "Apache-2.0",
+  "devDependencies": {
+    "@types/react": "^17.0.3",
+    "@types/react-dom": "^17.0.3",
+    "@typescript-eslint/eslint-plugin": "^4.21.0",
+    "@typescript-eslint/parser": "^4.21.0",
+    "cross-env": "^7.0.3",
+    "css-loader": "^5.2.1",
+    "eslint": "^7.24.0",
+    "eslint-plugin-react": "^7.23.2",
+    "html-webpack-plugin": "^5.3.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^8.1.0",
+    "typescript": "^4.2.4",
+    "webpack": "^5.31.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "worker-loader": "^3.0.8"
+  },
+  "dependencies": {
+    "jsqr": "^1.3.1",
+    "react-webcam": "^5.2.3"
+  },
+  "peerDependencies": {
+    "react": "^17.0.1",
+    "react-dom": "^17.0.1"
+  }
+}

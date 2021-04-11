@@ -1,0 +1,59 @@
+.info {
+    position: fixed;
+    left: 0;
+    top: 0;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    z-index: 1;
+    padding: 10px;
+    user-select: none;
+    display: grid;
+    grid-template-columns: repeat(2, minmax(100px, 1fr));
+    width: 100%;
+    max-width: 350px;
+    box-sizing: border-box;
+}
+
+label {
+    margin-right: 20px;
+}
+
+#preview {
+    border: 1px solid green;
+    width: 50px;
+    height: 50px;
+}
+
+#res {
+    background: rgba(255, 255, 255, 0.7);
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-width: 90%;
+    padding: 5px;
+    word-break: break-word;
+}
+
+@keyframes cursor-animation {
+    50% {
+        transform: scale(1.1);
+    }
+}
+
+.custom-cursor {
+    animation: cursor-animation ease-in-out 0.2s;
+    border-image: radial-gradient(transparent 85%, green 0) 1;
+}
+
+.custom:not(.qr-scanner--fullscreen) {
+    position: relative;
+    overflow: hidden;
+}
+
+.custom .qr-scanner__cursor {
+    border: 10000px solid rgba(0, 0, 0, 0.4);
+    border-radius: 10015px;
+    max-width: none;
+    max-height: none;
+}
