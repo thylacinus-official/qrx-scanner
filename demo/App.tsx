@@ -1,4 +1,5 @@
 import React, { RefObject, useEffect, useRef, useState } from 'react';
+import { isBrowser } from 'react-device-detect';
 import QRScanner, { IQRScannerProps } from '../src';
 
 import './style.css';
@@ -24,7 +25,9 @@ const usePreview = (): [
 };
 
 const App = (): JSX.Element => {
-    const [facingMode, setFacingMode] = useState('{"exact": "environment"}');
+    const [facingMode, setFacingMode] = useState(
+        isBrowser ? '"user"' : '{"exact": "environment"}'
+    );
 
     const [fullScreen, setFullScreen] = useState(true);
     const [videoSize, setVideoSize] = useState(
@@ -58,7 +61,7 @@ const App = (): JSX.Element => {
         height: 1080,
     };
 
-    return (
+    const info = (
         <>
             <div className="info">
                 <label htmlFor="facingMode">facingMode</label>
@@ -132,27 +135,31 @@ const App = (): JSX.Element => {
                 />
                 <img ref={previewRef} id="preview" />
             </div>
-            <QRScanner
-                callback={showPreview}
-                className={className}
-                cursorClassName={cursorClassName}
-                cursorResolution={cursorResolution || 400}
-                fullScreen={fullScreen}
-                minCursorSize={cursorSize}
-                onFailed={(error) => setRes(error.toString())}
-                onSuccess={({ data }) => setRes(data)}
-                ref={scannerRef}
-                videoSize={videoSize}
-                webcamProps={{ videoConstraints }}
-            >
-                {res && (
-                    <div id="res" onClick={onRefresh}>
-                        <div>{res.toString()}</div>
-                        🔄
-                    </div>
-                )}
-            </QRScanner>
         </>
+    );
+
+    return (
+        <QRScanner
+            callback={showPreview}
+            className={className}
+            cursorClassName={cursorClassName}
+            cursorResolution={cursorResolution || 400}
+            fullScreen={fullScreen}
+            minCursorSize={cursorSize}
+            onFailed={(error) => setRes(error.toString())}
+            onSuccess={({ data }) => setRes(data)}
+            ref={scannerRef}
+            videoSize={videoSize}
+            webcamProps={{ videoConstraints }}
+        >
+            {info}
+            {res && (
+                <div id="res" onClick={onRefresh}>
+                    <div>{res.toString()}</div>
+                    🔄
+                </div>
+            )}
+        </QRScanner>
     );
 };
 

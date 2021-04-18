@@ -10,15 +10,12 @@ npm install qrx-scanner
 
 ## Demo
 
+https://qrx-scanner.ddns.net/
+
 ```sh
-npm install -D http-server
-
-# http://localhost:8080/
-http-server node_modules/qrx-scanner/dist/demo
-
-# https://192.168.0.1:8080/
-http-server -S -C cert.pem node_modules/qrx-scanner/dist/demo
-
+git clone https://github.com/thylacinus-official/qrx-scanner .
+npm install
+npm run demo # https://localhost:8080/
 ```
 
 ## Usage

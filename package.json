@@ -10,15 +10,18 @@
   },
   "keywords": [
     "qr-code",
-    "react"
+    "qr-scanner",
+    "react",
+    "react-component"
   ],
   "scripts": {
     "build": "cross-env NODE_ENV=production webpack",
     "demo": "cross-env NODE_ENV=development webpack serve --config webpack.demo.config.js",
+    "demo:build": "cross-env NODE_ENV=production webpack --config webpack.demo.config.js",
     "demo:dev": "cross-env NODE_ENV=development webpack --config webpack.demo.config.js",
     "dev": "cross-env NODE_ENV=development webpack",
     "lint": "eslint {demo,src}/**/*.{js,ts,jsx,tsx} & tsc --noEmit",
-    "prepublish": "npm run dev && npm run demo:dev",
+    "prepublish": "npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -34,6 +37,7 @@
     "eslint-plugin-react": "^7.23.2",
     "html-webpack-plugin": "^5.3.1",
     "react": "^17.0.2",
+    "react-device-detect": "^1.17.0",
     "react-dom": "^17.0.2",
     "style-loader": "^2.0.0",
     "ts-loader": "^8.1.0",

@@ -33,6 +33,7 @@ label {
     max-width: 90%;
     padding: 5px;
     word-break: break-word;
+    z-index: 1;
 }
 
 @keyframes cursor-animation {
