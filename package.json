@@ -1,6 +1,6 @@
 {
   "name": "qrx-scanner",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "QR code scanning component for React based on jsQR and react-webcam.",
   "main": "dist/qrx-scanner.js",
   "types": "dist/types/index.d.ts",
