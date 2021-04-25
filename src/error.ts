@@ -1,8 +1,5 @@
 export class QRScannerError extends Error {
-    constructor(message?: string) {
-        super(message);
-        this.name = this.constructor.name;
-    }
+    public name = 'QRScannerError';
 }
 
 export class QRScannerAccessError extends QRScannerError {
@@ -12,7 +9,12 @@ export class QRScannerAccessError extends QRScannerError {
             error = name + (message && ` - ${message}`);
         }
         super(error);
+        this.name = 'QRScannerAccessError';
     }
 }
-export class QRScannerCanvasError extends QRScannerError {}
-export class QRScannerTimeoutError extends QRScannerError {}
+export class QRScannerCanvasError extends QRScannerError {
+    public name = 'QRScannerCanvasError';
+}
+export class QRScannerTimeoutError extends QRScannerError {
+    public name = 'QRScannerTimeoutError';
+}
