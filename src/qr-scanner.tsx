@@ -68,6 +68,7 @@ class QRScanner extends React.Component<IQRScannerProps, IQRScannerState> {
     loaded = false;
     videoTargetResolution: VideoResolution | null = null;
     webcam: Webcam | null = null;
+    worker: typeof Worker;
 
     constructor(props: IQRScannerProps) {
         super(props);
@@ -138,34 +139,36 @@ class QRScanner extends React.Component<IQRScannerProps, IQRScannerState> {
     }
 
     scan_(args?: Omit<ScanParams, 'silent'>): Promise<QRCode> {
-        const worker = new Worker();
-        const time = () => new Date().getTime();
-        const startTime = time();
+        const { worker } = this;
 
         const { timeout, callback } = {
             ...this.props,
             ...args,
         };
 
-        const promise = () =>
-            new Promise<QRCode>((resolve, reject) => {
+        return new Promise<QRCode>((resolve, reject) => {
+            const postMessage = () => {
                 const img = this.captureImage(...this.calcCaptureCoords());
-                callback && callback(img!);
                 worker.postMessage(img);
-                worker.onmessage = ({ data }: { data: QRCode }) => {
-                    if (data) {
-                        resolve(data);
-                        worker.terminate();
-                    } else if (time() - startTime > timeout) {
-                        reject(new QRScannerTimeoutError());
-                        worker.terminate();
-                    } else {
-                        resolve(promise());
-                    }
-                };
-            });
+                callback && callback(img!);
+            };
 
-        return promise();
+            worker.onmessage = ({ data }: { data: QRCode }) =>
+                data ? finish(resolve, data) : postMessage();
+
+            const rejectTimeout = setTimeout(
+                () => finish(reject, new QRScannerTimeoutError()),
+                timeout
+            );
+
+            const finish = <T,>(fn: (...args: T[]) => void, ...args: T[]) => {
+                worker.onmessage = null;
+                clearTimeout(rejectTimeout);
+                fn(...args);
+            };
+
+            postMessage();
+        });
     }
 
     scan = async ({
@@ -189,6 +192,7 @@ class QRScanner extends React.Component<IQRScannerProps, IQRScannerState> {
 
     componentDidMount(): void {
         const { video } = this.webcam!;
+        this.worker = new Worker();
         video?.addEventListener('loadedmetadata', this.handleLoadedMetadata, {
             once: true,
         });
@@ -196,6 +200,7 @@ class QRScanner extends React.Component<IQRScannerProps, IQRScannerState> {
     }
 
     componentWillUnmount(): void {
+        this.worker.terminate();
         window.removeEventListener('resize', this.handleResize);
     }
 
