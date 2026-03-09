@@ -34,7 +34,7 @@ export interface IQRScannerProps extends React.HTMLAttributes<HTMLDivElement> {
     cursorResolution: number;
     fullScreen: boolean;
     minCursorSize: number;
-    onFailed?: (error: Error) => void;
+    onFailed?: (error: unknown) => void;
     onSuccess?: (res: QRCode) => void;
     timeout: number;
     videoSize: 'contain' | 'cover';

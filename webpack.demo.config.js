@@ -14,7 +14,11 @@ module.exports = {
     resolve: {
         extensions: ['.js', '.jsx', '.ts', '.tsx'],
     },
-    devServer: { https: true, host: '0.0.0.0' },
+    devServer: {
+        host: '0.0.0.0',
+        open: true,
+        server: 'https',
+    },
     devtool: isDev ? 'source-map' : false,
     plugins: [new HTMLWebpackPlugin({ template: './index.html' })],
     module: {

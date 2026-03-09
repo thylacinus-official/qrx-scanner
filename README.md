@@ -37,7 +37,7 @@ const QRScannerComponent = () => <QRScanner />;
 | cursorResolution | number                           | 400                                            |
 | fullScreen       | boolean                          | false                                          |
 | minCursorSize    | number                           | 0.4                                            |
-| onFailed         | function(error: Error) => void   |                                                |
+| onFailed         | function(error: unknown) => void |                                                |
 | onSuccess        | function(res: QRCode) => void    |                                                |
 | timeout          | number                           | 30000                                          |
 | videoSize        | 'contain' \| 'cover'             | contain                                        |
