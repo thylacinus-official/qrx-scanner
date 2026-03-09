@@ -1,6 +1,6 @@
 {
   "name": "qrx-scanner",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "QR code scanning component for React based on jsQR and react-webcam.",
   "main": "dist/qrx-scanner.js",
   "types": "dist/types/index.d.ts",
@@ -21,7 +21,7 @@
     "demo:dev": "cross-env NODE_ENV=development webpack --config webpack.demo.config.js",
     "dev": "cross-env NODE_ENV=development webpack",
     "lint": "eslint {demo,src}/**/*.{js,ts,jsx,tsx} & tsc --noEmit",
-    "prepublish": "npm run dev",
+    "prepare": "npm run dev",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
